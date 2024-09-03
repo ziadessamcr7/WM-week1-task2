@@ -11,6 +11,7 @@ let leftImg = document.querySelector('.leftImage');
 let middleImg = document.querySelector('.middleImage');
 let rightImg = document.querySelector('.rightImage');
 let dots = document.querySelector('.dots');
+let row = document.querySelector('.row');
 
 let z = 0; // Index for left image
 let i = 1; // Index for middle image
@@ -58,6 +59,13 @@ function getNextImage() {
     displayImages();
     removeActive();
     paginationDots[newIndex].classList.add('active');
+
+    middleImg.classList.add('animate')
+
+
+    setTimeout(() => {
+        middleImg.classList.remove('animate')
+    }, 500);
 }
 
 function getPrevImage() {
@@ -77,3 +85,17 @@ function initSlider() {
 }
 
 initSlider();
+
+
+
+function startAutoplay() {
+    autoPlay = setInterval(getNextImage, 4000);
+}
+
+let autoPlay = setInterval(getNextImage, 4000);
+
+row.addEventListener('mouseover', () => {
+    clearInterval(autoPlay);
+});
+
+row.addEventListener('mouseout', startAutoplay);
